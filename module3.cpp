@@ -38,7 +38,7 @@ void parseAssignments()
     do
     {
         variable = parseName();
-        cin >> ws >> assignop >> value >> delimiter;
+         cin >> ws >> assignop >> value >> delimiter;
         symbolTable.insert(variable, value);
     }
     while (delimiter == ',');
