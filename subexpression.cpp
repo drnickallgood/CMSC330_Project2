@@ -17,6 +17,8 @@ using namespace std;
 #include "and.h"
 #include "or.h"
 #include "tern.h"
+#include <sstream>
+#include <fstream>
 
 SubExpression::SubExpression(Expression* left, Expression* right)
 {
@@ -24,30 +26,30 @@ SubExpression::SubExpression(Expression* left, Expression* right)
     this->right = right;
 }
 
-Expression* SubExpression::parse()
+Expression* SubExpression::parse(stringstream &in)
 {
     Expression* left;
     Expression* right;
     Expression *tern;
     char operation, paren, junk;
 
-    left = Operand::parse(); // x
-    cin >> operation;       // <
-    right = Operand::parse();   // y
+    left = Operand::parse(in); // x
+    in >> operation;       // <
+    right = Operand::parse(in);   // y
 
-    cin >> ws;
-    if(cin.peek() == '?') {
+    in >> ws;
+    if(in.peek() == '?') {
 
         // get rid of question mark
-        cin >> junk;
+        in >> junk;
 
         // get rid of paren
-        cin >> paren;
+        in >> paren;
 
-        tern = SubExpression::parse();
+        tern = SubExpression::parse(in);
     }
 
-    cin >> paren;
+    in >> paren;
 
     switch (operation)
     {
@@ -62,8 +64,8 @@ Expression* SubExpression::parse()
 
         // Hnadling in the event it's greater than or equal
         case '>':
-            if(cin.peek() == '=') {
-                cin >> junk;    // get rid of =
+            if(in.peek() == '=') {
+                in >> junk;    // get rid of =
                 return new Geq(left, right);
             }
             else {
@@ -72,8 +74,8 @@ Expression* SubExpression::parse()
 
             // handling if it's less than or less than or equal too
         case '<':
-            if(cin.peek() == '=') {
-                cin >> junk;    // Get rid of  =
+            if(in.peek() == '=') {
+                in >> junk;    // Get rid of  =
                 return new Leq(left, right);
             }
             else {

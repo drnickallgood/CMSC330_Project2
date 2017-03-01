@@ -1,5 +1,8 @@
+#include <sstream>
+#include <fstream>
+
 class Operand: public Expression
 {
 public:
-    static Expression* parse();
+    static Expression* parse(stringstream &in);
 };

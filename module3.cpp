@@ -7,17 +7,54 @@ using namespace std;
 #include "subexpression.h"
 #include "symboltable.h"
 #include "parse.h"
+#include <sstream>
+#include <fstream>
 
 SymbolTable symbolTable;
 
-void parseAssignments();
+void parseAssignments(stringstream &in);
 
 int main()
 {
+    const int SIZE = 256;
     Expression* expression;
-    char paren, comma;
+    char paren, comma, line[SIZE];
+
+    ifstream fin("input.txt");
+    //fin.open("input.txt");
+
+    // Read file
+    while(true) {
+
+        symbolTable.init();
+
+        // gets a line from teh file no bigger than SIZE
+        fin.getline(line, SIZE);
+
+        if(!fin) {
+
+            break;
+        }
+
+        // converts the line into a stringstream so we can do things to it later as a string
+        stringstream in(line, ios_base::in);
+
+        // like removing parens
+        in >> paren;
+        cout << line << " ";
+        expression = SubExpression::parse(in);
+        in >> comma;
+        parseAssignments(in);
+        int result = expression->evaluate();
+        cout << "Value = " << result << endl;
+
+
+    }
+
+    /*
     string program;
     string input = "";
+
 
 
     // Sample (( a + b) * c), a = 1 , b = 2, c = 3;
@@ -37,10 +74,12 @@ int main()
     cin >> comma;  
     parseAssignments();
     cout << "Value = " << expression->evaluate() << endl;
+
+     */
     return 0;
 }
 
-void parseAssignments()
+void parseAssignments(stringstream &in)
 {
     char assignop, delimiter, junk;
     string variable;
@@ -51,7 +90,7 @@ void parseAssignments()
     do
     {
         variable = parseName();
-         cin >> ws >> assignop >> value >> delimiter;
+         in >> ws >> assignop >> value >> delimiter;
         symbolTable.insert(variable, value);
     }
     while (delimiter == ',');
