@@ -18,18 +18,18 @@ Expression* Operand::parse(stringstream &in)
     int value;
 
     in >> ws;
-    if (isdigit(cin.peek()))
+    if (isdigit(in.peek()))
     {
         in >> value;
         Expression* literal = new Literal(value);
         return literal;
     }
-    if (cin.peek() == '(')
+    if (in.peek() == '(')
     {
         in >> paren;
         return SubExpression::parse(in);
     }
     else
-        return new Variable(parseName());
+        return new Variable(parseName(in));
     return 0;
 }

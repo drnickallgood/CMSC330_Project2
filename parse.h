@@ -1,1 +1,2 @@
-string parseName();
+#include <sstream>
+string parseName(stringstream &in);

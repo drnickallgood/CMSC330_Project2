@@ -89,7 +89,7 @@ void parseAssignments(stringstream &in)
     symbolTable.init();
     do
     {
-        variable = parseName();
+        variable = parseName(in);
          in >> ws >> assignop >> value >> delimiter;
         symbolTable.insert(variable, value);
     }

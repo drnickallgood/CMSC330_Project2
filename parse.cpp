@@ -4,16 +4,18 @@
 using namespace std;
 
 #include "parse.h"
+#include <sstream>
+#include <fstream>
 
-string parseName()
+string parseName(stringstream &in)
 {
     char alnum;
     string name = "";
 
-    cin >> ws;
-    while (isalnum(cin.peek()))
+    in >> ws;
+    while (isalnum(in.peek()))
     {
-        cin >> alnum;
+        in >> alnum;
         name += alnum;
     }
     return name;
