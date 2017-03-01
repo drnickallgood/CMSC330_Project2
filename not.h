@@ -4,9 +4,9 @@ public:
     Not(Expression* left, Expression* right): SubExpression(left, right)
     {
     }
-    double evaluate()
+    int evaluate()
     {
-        if( (left->evaluate() || right->evaluate()) > 0) {
+        if( ( (left->evaluate() > 0) || (right->evaluate() ) > 0)) {
 
             return 0;
         }

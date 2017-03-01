@@ -4,7 +4,7 @@ public:
     Leq(Expression* left, Expression* right): SubExpression(left, right)
     {
     }
-    double evaluate()
+    int evaluate()
     {
         if(left->evaluate() <= right->evaluate()) {
 

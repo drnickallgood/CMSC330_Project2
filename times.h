@@ -4,7 +4,7 @@ public:
     Times(Expression* left, Expression* right): SubExpression(left, right)
     {
     }
-    double evaluate()
+    int evaluate()
     {
         return left->evaluate() * right->evaluate();
     }

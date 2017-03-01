@@ -4,7 +4,7 @@ public:
     Ge(Expression* left, Expression* right): SubExpression(left, right)
     {
     }
-    double evaluate()
+    int evaluate()
     {
         // cin.peek() is = ?
         if(left->evaluate() > right->evaluate()) {

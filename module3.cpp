@@ -21,9 +21,19 @@ int main()
 
 
     // Sample (( a + b) * c), a = 1 , b = 2, c = 3;
+    // (1 : 2 ? a > b), a = 1, b = 2;
     cout << "Enter expression: ";
+
+    //((x < y) & ((x + y) = 10)), x = 2, y = 8;
+
+    // Get rid of leading paren
     cin >> paren;
+
+
+    // This is what actually starts the expression tree.
     expression = SubExpression::parse();
+
+
     cin >> comma;  
     parseAssignments();
     cout << "Value = " << expression->evaluate() << endl;
@@ -32,9 +42,12 @@ int main()
 
 void parseAssignments()
 {
-    char assignop, delimiter;
+    char assignop, delimiter, junk;
     string variable;
-    double value;
+    int value;
+    // Clear out the symbol table
+
+    symbolTable.init();
     do
     {
         variable = parseName();
@@ -43,4 +56,4 @@ void parseAssignments()
     }
     while (delimiter == ',');
 }
-   
+

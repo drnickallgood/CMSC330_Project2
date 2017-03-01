@@ -4,9 +4,9 @@ public:
     Or(Expression* left, Expression* right): SubExpression(left, right)
     {
     }
-    double evaluate()
+    int evaluate()
     {
-        if( (left->evaluate() || right->evaluate())) {
+        if( (left->evaluate() || right->evaluate() > 0)) {
 
             return 1;
         }

@@ -4,7 +4,7 @@ public:
     Geq(Expression* left, Expression* right): SubExpression(left, right)
     {
     }
-    double evaluate()
+    int evaluate()
     {
         if(left->evaluate() >= right->evaluate()) {
 

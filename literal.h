@@ -1,14 +1,14 @@
 class Literal: public Operand
 {
 public:
-    Literal(double value)
+    Literal(int value)
     {
         this->value = value;
     }
-    double evaluate()
+    int evaluate()
     {
         return value;
     }
 private:
-    double value;
+    int value;
 };
